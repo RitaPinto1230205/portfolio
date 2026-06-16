@@ -247,6 +247,74 @@
   }
   .pub-strip a{ text-decoration:underline; }
 
+  /* ---------- APP TILES (Android) ---------- */
+  .app-row{ display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+  .app-tile{
+    width:54px; height:54px; border-radius:15px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 16px rgba(44,27,16,0.2);
+  }
+  .app-tile.pingo{ background:linear-gradient(135deg, var(--gold), var(--sunset)); }
+  .app-tile.sapo{ background:linear-gradient(135deg, var(--olive), var(--teal)); }
+  .app-tile svg{ width:26px; height:26px; color:var(--paper); }
+  .app-row .app-name{ font-family:'Unbounded', sans-serif; font-weight:600; font-size:1.02rem; }
+  .app-row .app-sub{ font-size:0.78rem; color:var(--ink-soft); font-family:'Space Mono', monospace; }
+
+  /* ---------- FOUNDATIONS ---------- */
+  .foundation-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:18px; margin-top:8px; }
+  .foundation-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:24px;
+    transition:transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .foundation-card:hover{ transform:translateY(-4px); border-color:var(--accent); box-shadow:0 14px 28px rgba(44,27,16,0.1); }
+  .foundation-card svg{ width:24px; height:24px; color:var(--accent); margin-bottom:14px; }
+  .foundation-card h3{ font-size:1rem; font-weight:600; margin-bottom:8px; }
+  .foundation-card p{ font-size:0.86rem; color:var(--ink-soft); margin:0; }
+  .foundation-note{ margin-top:28px; font-size:0.92rem; color:var(--ink-soft); max-width:640px; }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{ position:relative; padding-left:26px; border-left:2px solid var(--line); }
+  .timeline-item{ position:relative; padding-bottom:26px; }
+  .timeline-item:last-child{ padding-bottom:0; }
+  .timeline-item::before{
+    content:''; position:absolute; left:-32px; top:4px; width:10px; height:10px;
+    border-radius:50%; background:var(--rust); border:2px solid var(--cream);
+  }
+  .timeline-item .when{
+    font-family:'Space Mono', monospace; font-size:0.74rem; color:var(--rust);
+    text-transform:uppercase; letter-spacing:0.05em;
+  }
+  .timeline-item h4{ font-size:1rem; font-weight:600; margin:4px 0 2px; }
+  .timeline-item .where{ font-size:0.86rem; color:var(--ink-soft); }
+  .timeline-item .extra{ font-size:0.8rem; color:var(--ink-soft); margin-top:4px; }
+
+  /* ---------- PORTRAIT ---------- */
+  .about-top{ display:flex; gap:46px; align-items:center; flex-wrap:wrap; margin-bottom:56px; }
+  .about-top .about-text{ flex:1; min-width:280px; }
+  .portrait-wrap{ position:relative; width:200px; height:200px; flex-shrink:0; }
+  .portrait-halo{
+    position:absolute; inset:-55px;
+    background:repeating-conic-gradient(from 0deg, var(--rust) 0deg 4deg, transparent 4deg 14deg);
+    -webkit-mask-image:radial-gradient(circle at center, white 0%, white 32%, transparent 62%);
+    mask-image:radial-gradient(circle at center, white 0%, white 32%, transparent 62%);
+    opacity:0.45; animation:spin 70s linear infinite; z-index:0;
+  }
+  .portrait{
+    position:relative; z-index:1; width:100%; height:100%; border-radius:50%; object-fit:cover;
+    border:5px solid var(--paper); box-shadow:0 16px 34px rgba(44,27,16,0.22); display:block;
+  }
+
+  /* ---------- LANGUAGES ---------- */
+  .lang-row{ display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; }
+  .lang-chip{
+    font-family:'Space Mono', monospace; font-size:0.78rem; background:var(--paper);
+    border:1px solid var(--line); padding:7px 13px; border-radius:8px;
+  }
+  .lang-chip b{ color:var(--ink); }
+
+  .side-grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:30px; align-items:start; }
+  @media (max-width:760px){ .side-grid{ grid-template-columns:1fr; } }
+
   /* ---------- ABOUT ---------- */
   .about-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:40px; align-items:start; }
   @media (max-width:760px){ .about-grid{ grid-template-columns:1fr; } }
@@ -298,6 +366,7 @@
     <a href="#android" data-nav>Android</a>
     <a href="#mobile-ai" data-nav>Mobile &amp; AI</a>
     <a href="#thesis" data-nav>Thesis</a>
+    <a href="#foundations" data-nav>Foundations</a>
     <a href="#about" data-nav>About</a>
     <a href="#contact" class="nav-cta">Let's talk</a>
   </nav>
@@ -339,6 +408,15 @@
 
     <div class="card-grid reveal">
       <div class="card">
+        <div class="app-row">
+          <div class="app-tile pingo">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C9 7 6 10.5 6 14a6 6 0 0012 0c0-3.5-3-7-6-12z"/></svg>
+          </div>
+          <div>
+            <div class="app-name">Pingo Doce</div>
+            <div class="app-sub">grocery retail · millions of users</div>
+          </div>
+        </div>
         <span class="tag">Pingo Doce App</span>
         <h3>Migrating millions of users to Jetpack Compose</h3>
         <p>Spearheaded the move from legacy Activity-based architecture to Compose, scaling adoption from 15% to 95% across a production app used by millions.</p>
@@ -349,6 +427,21 @@
         </ul>
       </div>
       <div class="card">
+        <div class="app-row">
+          <div class="app-tile sapo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <ellipse cx="12" cy="14" rx="7" ry="5.5"/>
+              <circle cx="8" cy="8.5" r="1.8"/>
+              <circle cx="16" cy="8.5" r="1.8"/>
+              <circle cx="9.5" cy="14" r="0.6" fill="currentColor"/>
+              <circle cx="14.5" cy="14" r="0.6" fill="currentColor"/>
+            </svg>
+          </div>
+          <div>
+            <div class="app-name">SAPO</div>
+            <div class="app-sub">greenfield mobile product</div>
+          </div>
+        </div>
         <span class="tag">SAPO App</span>
         <h3>Establishing the patterns for a greenfield product</h3>
         <p>Built core screens from the ground up on a new mobile product, setting the UI patterns and navigation architecture other features would follow.</p>
@@ -432,6 +525,57 @@
 
   <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C240,-10 480,90 720,40 C960,-10 1200,90 1440,40 L1440,80 L0,80 Z" fill="var(--cream)"/></svg>
 
+  <!-- FOUNDATIONS -->
+  <section class="block" id="foundations" style="--accent:var(--olive); background:var(--cream);">
+    <div class="section-head reveal">
+      <div class="sunburst-mini" aria-hidden="true"></div>
+      <h2>Two degrees worth of the rest of the stack</h2>
+      <p>No job title attached to these yet — but my BSc and MSc went well beyond mobile: backend systems, AI, databases, networks, security and the practices that keep software honest under pressure.</p>
+    </div>
+
+    <div class="foundation-grid reveal">
+      <div class="foundation-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><circle cx="7" cy="7" r="0.8" fill="currentColor"/><circle cx="7" cy="17" r="0.8" fill="currentColor"/></svg>
+        <h3>Backend &amp; Software Architecture</h3>
+        <p>Layered and service-oriented design, the same architectural thinking that shapes VoiceCRM's FastAPI backend.</p>
+      </div>
+      <div class="foundation-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></svg>
+        <h3>AI, NLP &amp; LLMs</h3>
+        <p>Studied AI fundamentals academically, then applied them hands-on — prompt design, evaluation metrics, integrating LLMs into a real product.</p>
+      </div>
+      <div class="foundation-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>
+        <h3>Databases</h3>
+        <p>Schema design, query optimisation and data modelling — relational fundamentals applied across every project above.</p>
+      </div>
+      <div class="foundation-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M7.8 7.5L11 16M16.2 7.5L13 16M8.4 6h7.2"/></svg>
+        <h3>Distributed Systems &amp; Networks</h3>
+        <p>Multicore &amp; distributed systems, computer networks and operating systems — how software behaves once more than one machine is involved.</p>
+      </div>
+      <div class="foundation-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+        <h3>Secure Software Development</h3>
+        <p>Threat modelling and secure coding practices — the habit of asking "how does this break" before shipping anything.</p>
+      </div>
+      <div class="foundation-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 11l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        <h3>Software Quality &amp; Testing</h3>
+        <p>Requirements engineering and software quality coursework, paired with unit testing on every shipped feature since.</p>
+      </div>
+      <div class="foundation-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12a8 8 0 0114-5M20 12a8 8 0 01-14 5"/><path d="M18 3v4h-4M6 21v-4h4"/></svg>
+        <h3>CI/CD &amp; Pipelines</h3>
+        <p>Comfortable setting up and working inside CI/CD pipelines — adopted from day one in my internship and used since.</p>
+      </div>
+    </div>
+
+    <p class="foundation-note reveal">I haven't worked professionally in these areas yet — but they're not theoretical either. They show up in how I structure code, the questions I ask in code review, and the parts of VoiceCRM that go beyond the Swift UI layer.</p>
+  </section>
+
+  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C240,-10 480,90 720,40 C960,-10 1200,90 1440,40 L1440,80 L0,80 Z" fill="var(--cream)"/></svg>
+
   <!-- ABOUT -->
   <section class="block" id="about" style="--accent:var(--rust); background:var(--cream);">
     <div class="section-head reveal">
@@ -439,17 +583,66 @@
       <h2>Off the clock, still building something</h2>
     </div>
 
-    <div class="about-grid reveal">
+    <div class="about-top reveal">
+      <div class="portrait-wrap">
+        <div class="portrait-halo" aria-hidden="true"></div>
+        <img class="portrait" src="rita-photo.png" alt="Rita Pinto smiling, sitting backwards on a chair, indoors.">
+      </div>
       <div class="about-text">
         <p>I like things that are well-made and a little bit fun — code included. Most of what I build outside of work starts the same way the apps above did: noticing something clunky, and not being able to leave it alone until it's smoother.</p>
         <p>I'm based in Porto, finishing my MSc while job-hunting for my next Android role, and genuinely enjoy the parts of the job most people skip — clean architecture, tidy state management, the kind of UI detail nobody notices unless it's missing.</p>
       </div>
-      <ul class="fact-list">
-        <li><span class="dot"></span>Recently adopted a puppy, currently in the "everything is a chew toy" phase</li>
-        <li><span class="dot"></span>Designs and builds small web projects purely for the fun of it</li>
-        <li><span class="dot"></span>Always has a playlist running in the background while coding</li>
-        <li><span class="dot"></span>Direct communicator — says what she means, expects the same back</li>
-      </ul>
+    </div>
+
+    <div class="side-grid reveal">
+      <div>
+        <h3 style="font-size:1.1rem; margin-bottom:18px;">Where I've been</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="when">Jun. 2024 — Present</div>
+            <h4>Mobile Developer, Bliss Applications</h4>
+            <div class="where">Porto, Portugal</div>
+          </div>
+          <div class="timeline-item">
+            <div class="when">Sept. 2023 — Jun. 2024</div>
+            <h4>Android Developer Intern, Bliss Applications</h4>
+            <div class="where">Porto, Portugal</div>
+          </div>
+          <div class="timeline-item">
+            <div class="when">Sept. 2023 — Jun. 2026 (expected)</div>
+            <h4>MSc Software Engineering, ISEP</h4>
+            <div class="where">Porto, Portugal</div>
+          </div>
+          <div class="timeline-item">
+            <div class="when">Oct. 2020 — Jun. 2023</div>
+            <h4>BSc Computer Engineering, UTAD</h4>
+            <div class="where">Vila Real, Portugal</div>
+            <div class="extra">Secretary, Computer Science Student Union (NEEI) · Presenter, UTAD Summit &amp; CS Days (2021, 2022)</div>
+          </div>
+        </div>
+        <div class="lang-row">
+          <!-- TODO Rita: confirm/add proficiency levels or other languages -->
+          <span class="lang-chip"><b>Portuguese</b> · Native</span>
+          <span class="lang-chip"><b>English</b> · Fluent</span>
+        </div>
+      </div>
+
+      <div>
+        <ul class="fact-list">
+          <li><span class="dot"></span>Recently adopted a puppy, currently in the "everything is a chew toy" phase</li>
+          <li><span class="dot"></span>Designs and builds small web projects purely for the fun of it</li>
+          <li><span class="dot"></span>Always has a playlist running in the background while coding</li>
+          <li><span class="dot"></span>Direct communicator — says what she means, expects the same back</li>
+        </ul>
+        <div class="card" style="margin-top:18px;">
+          <span class="tag">Side Project</span>
+          <h3>Adeus, Adeus — a goodbye, designed properly</h3>
+          <p>When three years at Bliss came to an end, instead of a plain message I built a small interactive site for it — a letter, photo memories, and a way for the team to leave their own message back.</p>
+          <div class="pub-strip">
+            <a href="https://ritapintoblissapp.github.io/Adeus_Adeus/" target="_blank" rel="noopener">Visit the site →</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -499,7 +692,7 @@
 
   // scroll spy
   const navItems = document.querySelectorAll('[data-nav]');
-  const sections = ['android','mobile-ai','thesis','about'].map(id => document.getElementById(id));
+  const sections = ['android','mobile-ai','thesis','foundations','about'].map(id => document.getElementById(id));
   function updateActive(){
     let current = null;
     sections.forEach(sec => {
