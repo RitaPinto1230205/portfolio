@@ -1,464 +1,307 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rita Pinto — Android & Mobile Engineer</title>
-<meta name="description" content="Rita Pinto — Android developer building calm, fast mobile experiences, with a thesis teaching apps to listen.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='%23F2622A'/%3E%3Ccircle cx='50' cy='50' r='24' fill='%23EFA323'/%3E%3C/svg%3E">
+<title>Rita Pinto — Software Engineer</title>
+<meta name="description" content="Rita Pinto — Software Engineer specializing in mobile, backend and applied AI.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23161A2B'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%233355FF' font-family='Arial' font-weight='700'%3ER%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cream:#FBF1DC;
-    --paper:#FFFBF0;
-    --ink:#2C1B10;
-    --ink-soft:#5B4632;
-    --sunset:#F2622A;
-    --gold:#EFA323;
-    --rust:#A23E16;
-    --olive:#6B7C3C;
-    --teal:#2F6F6B;
-    --line: rgba(44,27,16,0.12);
+    --bg:#FAFAF8;
+    --paper:#FFFFFF;
+    --ink:#15171F;
+    --ink-soft:#54586A;
+    --accent:#3355FF;
+    --accent-ink:#1B2E8C;
+    --warm:#D3502A;
+    --line: rgba(21,23,31,0.10);
     --max: 1080px;
-    --section-pad: clamp(72px, 12vw, 140px);
+    --section-pad: clamp(64px, 10vw, 120px);
   }
-
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior:auto; }
-    *, *::before, *::after{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
-  }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } *{ animation-duration:.001ms !important; transition-duration:.001ms !important; } }
+
+  [data-lang="en"] .pt{ display:none; }
+  [data-lang="pt"] .en{ display:none; }
 
   body{
-    margin:0;
-    background:var(--cream);
-    color:var(--ink);
-    font-family:'Work Sans', sans-serif;
-    font-size:16px;
-    line-height:1.6;
-    overflow-x:hidden;
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Work Sans', sans-serif; font-size:16px; line-height:1.65;
     -webkit-font-smoothing:antialiased;
   }
-
-  h1,h2,h3{
-    font-family:'Unbounded', sans-serif;
-    margin:0;
-    line-height:1.05;
-    letter-spacing:-0.01em;
-  }
-
+  h1,h2,h3{ font-family:'Unbounded', sans-serif; margin:0; line-height:1.12; letter-spacing:-0.01em; }
   a{ color:inherit; }
-
-  .skip-link{
-    position:absolute; left:-999px; top:0;
-    background:var(--ink); color:var(--cream); padding:10px 16px; z-index:999;
-  }
+  img{ max-width:100%; display:block; }
+  :focus-visible{ outline:3px solid var(--accent); outline-offset:3px; border-radius:4px; }
+  .skip-link{ position:absolute; left:-999px; top:0; background:var(--ink); color:#fff; padding:10px 16px; z-index:999; }
   .skip-link:focus{ left:12px; top:12px; border-radius:6px; }
 
-  :focus-visible{
-    outline:3px solid var(--rust);
-    outline-offset:3px;
-    border-radius:4px;
-  }
+  .progress{ position:fixed; top:0; left:0; height:3px; width:0%; background:var(--accent); z-index:1000; transition:width .1s linear; }
 
-  /* grain texture overlay */
-  .grain{
-    position:fixed; inset:0; pointer-events:none; z-index:5; opacity:0.05; mix-blend-mode:multiply;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  /* scroll progress */
-  .progress{
-    position:fixed; top:0; left:0; height:3px; width:0%;
-    background:linear-gradient(90deg, var(--sunset), var(--gold));
-    z-index:1000; transition:width 0.1s linear;
-  }
-
-  /* ---------- NAV ---------- */
   header.nav{
     position:fixed; top:0; left:0; right:0; z-index:900;
     display:flex; align-items:center; justify-content:space-between;
-    padding:18px clamp(20px, 5vw, 56px);
-    background:rgba(251,241,220,0.82);
-    backdrop-filter:blur(10px);
+    padding:16px clamp(20px,5vw,56px);
+    background:rgba(250,250,248,0.86); backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
-  .logo{
-    display:flex; align-items:center; gap:10px;
-    font-family:'Unbounded', sans-serif; font-weight:700; font-size:1.05rem;
-    text-decoration:none; color:var(--ink);
-  }
-  .logo svg{ width:26px; height:26px; flex-shrink:0; }
-  .logo .spin-slow{ animation:spin 18s linear infinite; transform-origin:center; }
+  .logo{ display:flex; align-items:center; gap:10px; font-family:'Unbounded', sans-serif; font-weight:700; font-size:1.02rem; text-decoration:none; color:var(--ink); }
+  .logo .mark{ width:28px; height:28px; border-radius:8px; background:var(--ink); color:var(--accent); display:flex; align-items:center; justify-content:center; font-size:0.95rem; font-weight:800; }
 
-  nav.links{ display:flex; gap:clamp(14px, 2.5vw, 30px); align-items:center; }
-  nav.links a{
-    font-size:0.92rem; font-weight:600; text-decoration:none; color:var(--ink-soft);
-    position:relative; padding:6px 2px;
-  }
-  nav.links a::after{
-    content:''; position:absolute; left:0; right:100%; bottom:0; height:2px;
-    background:var(--rust); transition:right 0.25s ease;
-  }
+  nav.links{ display:flex; gap:clamp(12px,2.2vw,26px); align-items:center; }
+  nav.links a{ font-size:0.9rem; font-weight:600; text-decoration:none; color:var(--ink-soft); position:relative; padding:6px 2px; }
+  nav.links a::after{ content:''; position:absolute; left:0; right:100%; bottom:0; height:2px; background:var(--accent); transition:right .25s ease; }
   nav.links a:hover::after, nav.links a.active::after{ right:0; }
   nav.links a.active{ color:var(--ink); }
 
-  .nav-cta{
-    background:var(--ink); color:var(--cream) !important; padding:9px 18px; border-radius:999px;
-    font-weight:700; font-size:0.86rem;
+  .lang-toggle{
+    display:flex; align-items:center; border:1px solid var(--line); border-radius:999px; padding:3px; font-family:'Space Mono', monospace; font-size:0.78rem;
   }
+  .lang-toggle button{
+    border:none; background:none; padding:6px 12px; border-radius:999px; cursor:pointer; color:var(--ink-soft); font-family:inherit; font-size:inherit; font-weight:700;
+  }
+  .lang-toggle button.active{ background:var(--ink); color:#fff; }
+
+  .nav-cta{ background:var(--ink); color:#fff !important; padding:9px 18px; border-radius:999px; font-weight:700; font-size:0.85rem; }
   .nav-cta::after{ display:none; }
-  .nav-cta:hover{ background:var(--rust); }
+  .nav-cta:hover{ background:var(--accent); }
 
   .menu-btn{ display:none; background:none; border:none; cursor:pointer; padding:8px; }
-  .menu-btn svg{ width:24px; height:24px; }
-
-  @media (max-width:760px){
-    nav.links{
-      position:fixed; top:64px; left:0; right:0; bottom:0;
-      background:var(--cream); flex-direction:column; justify-content:flex-start;
-      padding:40px 30px; gap:26px; transform:translateX(100%); transition:transform 0.3s ease;
-      font-size:1.3rem;
-    }
+  .menu-btn svg{ width:22px; height:22px; }
+  @media (max-width:860px){
+    nav.links{ position:fixed; top:60px; left:0; right:0; bottom:0; background:var(--bg); flex-direction:column; justify-content:flex-start; padding:36px 30px; gap:22px; transform:translateX(100%); transition:transform .3s ease; font-size:1.2rem; }
     nav.links.open{ transform:translateX(0); }
     .menu-btn{ display:block; }
   }
 
-  /* ---------- HERO ---------- */
-  .hero{
-    position:relative; min-height:100vh; display:flex; align-items:center;
-    padding:120px clamp(20px,6vw,56px) 80px; overflow:hidden;
-  }
-  .sunburst{
-    position:absolute; top:50%; left:50%; width:170vmax; height:170vmax;
-    transform:translate(-50%,-50%);
-    background:repeating-conic-gradient(from 0deg, var(--sunset) 0deg 4deg, transparent 4deg 16deg);
-    -webkit-mask-image:radial-gradient(circle at center, white 0%, white 18%, transparent 46%);
-    mask-image:radial-gradient(circle at center, white 0%, white 18%, transparent 46%);
-    opacity:0.5; animation:spin 140s linear infinite; pointer-events:none; z-index:0;
-  }
-  .blob{
-    position:absolute; border-radius:50%; filter:blur(40px); pointer-events:none; z-index:0;
-  }
-  .hero .blob.b1{ width:520px; height:520px; top:-160px; right:-160px; background:radial-gradient(circle, var(--gold), transparent 70%); opacity:0.55; }
-  .hero .blob.b2{ width:420px; height:420px; bottom:-180px; left:-120px; background:radial-gradient(circle, var(--olive), transparent 70%); opacity:0.35; }
-
-  @keyframes spin{ to{ transform:translate(-50%,-50%) rotate(360deg); } }
-
-  .hero-content{ position:relative; z-index:2; max-width:760px; }
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:'Space Mono', monospace; font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase;
-    color:var(--rust); background:rgba(162,62,22,0.08); border:1px solid rgba(162,62,22,0.25);
-    padding:7px 14px; border-radius:999px; margin-bottom:22px;
-  }
-  .hero h1{
-    font-size:clamp(2.6rem, 8vw, 5.2rem); font-weight:800; color:var(--ink);
-  }
-  .hero h1 span{ color:var(--sunset); }
-  .hero p.lede{
-    font-size:clamp(1.05rem, 2vw, 1.35rem); color:var(--ink-soft); margin:26px 0 34px; max-width:560px; font-weight:400;
-  }
-  .btn-row{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:38px; }
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:'Work Sans', sans-serif; font-weight:700; font-size:0.95rem;
-    padding:14px 26px; border-radius:999px; text-decoration:none; transition:transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .btn-primary{ background:var(--ink); color:var(--cream); }
-  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(44,27,16,0.25); }
+  .hero{ position:relative; padding:150px clamp(20px,6vw,56px) 90px; max-width:var(--max); margin:0 auto; }
+  .hero-grid{ display:grid; grid-template-columns:1.3fr 0.9fr; gap:50px; align-items:center; }
+  @media (max-width:820px){ .hero-grid{ grid-template-columns:1fr; } }
+  .eyebrow{ display:inline-flex; align-items:center; gap:8px; font-family:'Space Mono', monospace; font-size:0.76rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent-ink); background:rgba(51,85,255,0.08); border:1px solid rgba(51,85,255,0.25); padding:7px 14px; border-radius:999px; margin-bottom:22px; }
+  .hero h1{ font-size:clamp(2.2rem, 4.6vw, 3.4rem); font-weight:700; color:var(--ink); }
+  .hero h1 .accent{ color:var(--accent); }
+  .hero p.lede{ font-size:clamp(1rem, 1.5vw, 1.18rem); color:var(--ink-soft); margin:22px 0 30px; max-width:560px; }
+  .btn-row{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:30px; }
+  .btn{ display:inline-flex; align-items:center; gap:8px; font-family:'Work Sans', sans-serif; font-weight:700; font-size:0.92rem; padding:13px 24px; border-radius:10px; text-decoration:none; transition:transform .2s ease, box-shadow .2s ease; border:none; cursor:pointer; }
+  .btn-primary{ background:var(--ink); color:#fff; }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 22px rgba(21,23,31,0.22); }
   .btn-outline{ border:1.5px solid var(--ink); color:var(--ink); }
-  .btn-outline:hover{ background:var(--ink); color:var(--cream); transform:translateY(-2px); }
+  .btn-outline:hover{ background:var(--ink); color:#fff; }
+  .chip-row{ display:flex; flex-wrap:wrap; gap:9px; }
+  .chip{ font-family:'Space Mono', monospace; font-size:0.76rem; color:var(--ink-soft); background:var(--paper); border:1px solid var(--line); padding:6px 12px; border-radius:8px; }
 
-  .chip-row{ display:flex; flex-wrap:wrap; gap:10px; }
-  .chip{
-    font-family:'Space Mono', monospace; font-size:0.78rem; color:var(--ink-soft);
-    background:var(--paper); border:1px solid var(--line); padding:7px 13px; border-radius:8px;
-  }
+  .hero-card{ background:var(--paper); border:1px solid var(--line); border-radius:20px; padding:28px; box-shadow:0 20px 50px rgba(21,23,31,0.06); }
+  .hero-portrait{ width:100%; aspect-ratio:1/1; border-radius:14px; overflow:hidden; margin-bottom:18px; background:var(--ink); }
+  .hero-portrait img{ width:100%; height:100%; object-fit:cover; object-position:50% 28%; }
+  .hero-stats{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .hero-stats div{ text-align:left; }
+  .hero-stats .num{ font-family:'Unbounded', sans-serif; font-size:1.4rem; font-weight:700; color:var(--ink); }
+  .hero-stats .label{ font-size:0.76rem; color:var(--ink-soft); margin-top:2px; }
 
-  /* ---------- SECTION SHELL ---------- */
-  section.block{
-    position:relative; padding:var(--section-pad) clamp(20px,6vw,56px);
-    max-width:var(--max); margin:0 auto;
-  }
-  .section-head{ position:relative; margin-bottom:54px; max-width:680px; }
-  .section-head .sunburst-mini{
-    position:absolute; top:-60px; left:-90px; width:300px; height:300px;
-    background:repeating-conic-gradient(from 0deg, var(--accent) 0deg 4deg, transparent 4deg 14deg);
-    -webkit-mask-image:radial-gradient(circle at center, white 0%, white 20%, transparent 60%);
-    mask-image:radial-gradient(circle at center, white 0%, white 20%, transparent 60%);
-    opacity:0.35; animation:spin 90s linear infinite; z-index:0; pointer-events:none;
-  }
-  .section-head h2{
-    font-size:clamp(1.7rem, 4vw, 2.6rem); font-weight:700; position:relative; z-index:1;
-  }
-  .section-head p{ color:var(--ink-soft); font-size:1.05rem; max-width:560px; position:relative; z-index:1; margin-top:16px; }
+  section.block{ position:relative; padding:var(--section-pad) clamp(20px,6vw,56px); max-width:var(--max); margin:0 auto; }
+  .section-head{ margin-bottom:46px; max-width:680px; }
+  .eyebrow-sm{ font-family:'Space Mono', monospace; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent-ink); display:block; margin-bottom:10px; }
+  .section-head h2{ font-size:clamp(1.5rem, 3.2vw, 2.2rem); font-weight:700; }
+  .section-head p{ color:var(--ink-soft); font-size:1.02rem; max-width:560px; margin-top:14px; }
 
-  .reveal{ opacity:0; transform:translateY(28px); transition:opacity 0.7s ease, transform 0.7s ease; }
+  .reveal{ opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease; }
   .reveal.is-visible{ opacity:1; transform:translateY(0); }
 
-  /* ---------- CARDS ---------- */
-  .card-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .card-grid{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
   @media (max-width:720px){ .card-grid{ grid-template-columns:1fr; } }
-
-  .card{
-    background:var(--paper); border:1px solid var(--line); border-radius:18px;
-    padding:30px; transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-  }
-  .card:hover{ transform:translateY(-5px); box-shadow:0 16px 34px rgba(44,27,16,0.12); border-color:var(--accent); }
-  .card .tag{
-    font-family:'Space Mono', monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em;
-    color:var(--accent); margin-bottom:10px; display:block;
-  }
-  .card h3{ font-size:1.25rem; font-weight:600; margin-bottom:10px; }
-  .card p{ color:var(--ink-soft); font-size:0.96rem; margin:0 0 14px; }
-  .card ul{ margin:0; padding-left:18px; color:var(--ink-soft); font-size:0.92rem; }
+  .card{ background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:28px; transition:transform .2s ease, box-shadow .2s ease; }
+  .card:hover{ transform:translateY(-4px); box-shadow:0 14px 30px rgba(21,23,31,0.08); }
+  .card .tag{ font-family:'Space Mono', monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.07em; color:var(--accent-ink); margin-bottom:10px; display:block; }
+  .card h3{ font-size:1.16rem; font-weight:600; margin-bottom:9px; }
+  .card p{ color:var(--ink-soft); font-size:0.94rem; margin:0 0 12px; }
+  .card ul{ margin:0; padding-left:18px; color:var(--ink-soft); font-size:0.9rem; }
   .card ul li{ margin-bottom:6px; }
 
-  .credential{
-    margin-top:28px; display:flex; align-items:center; gap:16px; flex-wrap:wrap;
-    background:rgba(239,163,35,0.1); border:1px dashed rgba(162,62,22,0.3);
-    padding:18px 22px; border-radius:14px;
-  }
-  .credential svg{ width:34px; height:34px; flex-shrink:0; color:var(--rust); }
-  .credential strong{ display:block; font-size:0.98rem; }
-  .credential span{ font-size:0.85rem; color:var(--ink-soft); }
+  .app-row{ display:flex; align-items:center; gap:13px; margin-bottom:14px; }
+  .logo-tile{ background:var(--paper); border:1px solid var(--line); border-radius:10px; display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; }
+  .logo-tile.pingo{ background:#000; }
+  .app-name{ font-family:'Unbounded', sans-serif; font-weight:600; font-size:0.98rem; }
+  .app-sub{ font-size:0.76rem; color:var(--ink-soft); font-family:'Space Mono', monospace; }
 
-  /* ---------- THESIS DATA PANEL ---------- */
-  .data-panel{
-    display:flex; gap:0; flex-wrap:wrap; background:var(--ink); color:var(--cream);
-    border-radius:18px; overflow:hidden; margin-top:30px;
-  }
-  .data-cell{
-    flex:1; min-width:140px; padding:26px 22px; border-right:1px solid rgba(251,241,220,0.12);
-  }
+  .credential{ margin-top:24px; display:flex; align-items:center; gap:15px; flex-wrap:wrap; background:rgba(51,85,255,0.05); border:1px dashed rgba(51,85,255,0.3); padding:16px 20px; border-radius:14px; }
+  .credential strong{ display:block; font-size:0.95rem; }
+  .credential span{ font-size:0.83rem; color:var(--ink-soft); }
+
+  .data-panel{ display:flex; gap:0; flex-wrap:wrap; background:var(--ink); color:#fff; border-radius:16px; overflow:hidden; margin-top:26px; }
+  .data-cell{ flex:1; min-width:140px; padding:24px 20px; border-right:1px solid rgba(255,255,255,0.1); }
   .data-cell:last-child{ border-right:none; }
-  .data-cell .num{ font-family:'Space Mono', monospace; font-size:2rem; font-weight:700; color:var(--gold); }
-  .data-cell .label{ font-size:0.78rem; color:rgba(251,241,220,0.65); margin-top:4px; text-transform:uppercase; letter-spacing:0.06em; }
+  .data-cell .num{ font-family:'Space Mono', monospace; font-size:1.8rem; font-weight:700; color:var(--accent); }
+  .data-cell .label{ font-size:0.76rem; color:rgba(255,255,255,0.65); margin-top:4px; text-transform:uppercase; letter-spacing:0.05em; }
 
-  .stack-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; }
-
-  .pub-strip{
-    margin-top:24px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;
-    font-family:'Space Mono', monospace; font-size:0.82rem; color:var(--olive);
-  }
+  .stack-row{ display:flex; gap:9px; flex-wrap:wrap; margin-top:20px; }
+  .pub-strip{ margin-top:20px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; font-family:'Space Mono', monospace; font-size:0.8rem; color:var(--accent-ink); }
   .pub-strip a{ text-decoration:underline; }
 
-  /* ---------- APP TILES (Android) ---------- */
-  .app-row{ display:flex; align-items:center; gap:14px; margin-bottom:16px; }
-  .app-tile{
-    width:54px; height:54px; border-radius:15px; flex-shrink:0;
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 6px 16px rgba(44,27,16,0.2);
-  }
-  .app-tile.pingo{ background:linear-gradient(135deg, var(--gold), var(--sunset)); }
-  .app-tile.sapo{ background:linear-gradient(135deg, var(--olive), var(--teal)); }
-  .app-tile svg{ width:26px; height:26px; color:var(--paper); }
-  .app-row .app-name{ font-family:'Unbounded', sans-serif; font-weight:600; font-size:1.02rem; }
-  .app-row .app-sub{ font-size:0.78rem; color:var(--ink-soft); font-family:'Space Mono', monospace; }
+  .foundation-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:16px; margin-top:6px; }
+  .foundation-card{ background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:22px; transition:transform .2s ease, box-shadow .2s ease; }
+  .foundation-card:hover{ transform:translateY(-3px); box-shadow:0 12px 26px rgba(21,23,31,0.07); }
+  .foundation-card svg{ width:22px; height:22px; color:var(--accent); margin-bottom:12px; }
+  .foundation-card h3{ font-size:0.98rem; font-weight:600; margin-bottom:7px; }
+  .foundation-card p{ font-size:0.85rem; color:var(--ink-soft); margin:0; }
+  .foundation-note{ margin-top:26px; font-size:0.9rem; color:var(--ink-soft); max-width:640px; }
 
-  /* ---------- FOUNDATIONS ---------- */
-  .foundation-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:18px; margin-top:8px; }
-  .foundation-card{
-    background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:24px;
-    transition:transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-  }
-  .foundation-card:hover{ transform:translateY(-4px); border-color:var(--accent); box-shadow:0 14px 28px rgba(44,27,16,0.1); }
-  .foundation-card svg{ width:24px; height:24px; color:var(--accent); margin-bottom:14px; }
-  .foundation-card h3{ font-size:1rem; font-weight:600; margin-bottom:8px; }
-  .foundation-card p{ font-size:0.86rem; color:var(--ink-soft); margin:0; }
-  .foundation-note{ margin-top:28px; font-size:0.92rem; color:var(--ink-soft); max-width:640px; }
-
-  /* ---------- TIMELINE ---------- */
-  .timeline{ position:relative; padding-left:26px; border-left:2px solid var(--line); }
-  .timeline-item{ position:relative; padding-bottom:26px; }
+  .timeline{ position:relative; padding-left:24px; border-left:2px solid var(--line); }
+  .timeline-item{ position:relative; padding-bottom:24px; }
   .timeline-item:last-child{ padding-bottom:0; }
-  .timeline-item::before{
-    content:''; position:absolute; left:-32px; top:4px; width:10px; height:10px;
-    border-radius:50%; background:var(--rust); border:2px solid var(--cream);
-  }
-  .timeline-item .when{
-    font-family:'Space Mono', monospace; font-size:0.74rem; color:var(--rust);
-    text-transform:uppercase; letter-spacing:0.05em;
-  }
-  .timeline-item h4{ font-size:1rem; font-weight:600; margin:4px 0 2px; }
-  .timeline-item .where{ font-size:0.86rem; color:var(--ink-soft); }
-  .timeline-item .extra{ font-size:0.8rem; color:var(--ink-soft); margin-top:4px; }
+  .timeline-item::before{ content:''; position:absolute; left:-30px; top:4px; width:9px; height:9px; border-radius:50%; background:var(--accent); border:2px solid var(--bg); }
+  .timeline-item .when{ font-family:'Space Mono', monospace; font-size:0.72rem; color:var(--accent-ink); text-transform:uppercase; letter-spacing:0.04em; }
+  .timeline-item h4{ font-size:0.98rem; font-weight:600; margin:4px 0 2px; font-family:'Work Sans',sans-serif; }
+  .timeline-item .where{ font-size:0.84rem; color:var(--ink-soft); }
+  .timeline-item .extra{ font-size:0.78rem; color:var(--ink-soft); margin-top:4px; }
 
-  /* ---------- PORTRAIT ---------- */
-  .about-top{ display:flex; gap:46px; align-items:center; flex-wrap:wrap; margin-bottom:56px; }
-  .about-top .about-text{ flex:1; min-width:280px; }
-  .portrait-wrap{ position:relative; width:200px; height:200px; flex-shrink:0; }
-  .portrait-halo{
-    position:absolute; inset:-55px;
-    background:repeating-conic-gradient(from 0deg, var(--rust) 0deg 4deg, transparent 4deg 14deg);
-    -webkit-mask-image:radial-gradient(circle at center, white 0%, white 32%, transparent 62%);
-    mask-image:radial-gradient(circle at center, white 0%, white 32%, transparent 62%);
-    opacity:0.45; animation:spin 70s linear infinite; z-index:0;
-  }
-  .portrait{
-    position:relative; z-index:1; width:100%; height:100%; border-radius:50%; object-fit:cover;
-    border:5px solid var(--paper); box-shadow:0 16px 34px rgba(44,27,16,0.22); display:block;
-  }
-
-  /* ---------- LANGUAGES ---------- */
-  .lang-row{ display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; }
-  .lang-chip{
-    font-family:'Space Mono', monospace; font-size:0.78rem; background:var(--paper);
-    border:1px solid var(--line); padding:7px 13px; border-radius:8px;
-  }
+  .side-grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:28px; align-items:start; margin-top:10px; }
+  @media (max-width:800px){ .side-grid{ grid-template-columns:1fr; } }
+  .fact-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
+  .fact-list li{ display:flex; gap:11px; align-items:flex-start; font-size:0.92rem; color:var(--ink-soft); background:var(--paper); border:1px solid var(--line); padding:14px 16px; border-radius:12px; }
+  .fact-list .dot{ width:7px; height:7px; border-radius:50%; background:var(--accent); margin-top:7px; flex-shrink:0; }
+  .lang-row{ display:flex; gap:9px; margin-top:16px; flex-wrap:wrap; }
+  .lang-chip{ font-family:'Space Mono', monospace; font-size:0.76rem; background:var(--paper); border:1px solid var(--line); padding:6px 12px; border-radius:8px; }
   .lang-chip b{ color:var(--ink); }
 
-  .side-grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:30px; align-items:start; }
-  @media (max-width:760px){ .side-grid{ grid-template-columns:1fr; } }
-
-  /* ---------- ABOUT ---------- */
-  .about-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:40px; align-items:start; }
-  @media (max-width:760px){ .about-grid{ grid-template-columns:1fr; } }
-  .about-text p{ font-size:1.08rem; color:var(--ink-soft); margin:0 0 18px; }
-  .fact-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:16px; }
-  .fact-list li{
-    display:flex; gap:12px; align-items:flex-start; font-size:0.95rem; color:var(--ink-soft);
-    background:var(--paper); border:1px solid var(--line); padding:16px 18px; border-radius:12px;
-  }
-  .fact-list .dot{ width:8px; height:8px; border-radius:50%; background:var(--sunset); margin-top:7px; flex-shrink:0; }
-
-  /* ---------- WAVE DIVIDER ---------- */
-  .wave{ display:block; width:100%; height:auto; }
-
-  /* ---------- FOOTER ---------- */
-  footer{
-    position:relative; padding:90px clamp(20px,6vw,56px) 50px; background:var(--ink); color:var(--cream); overflow:hidden;
-  }
-  footer .blob{ position:absolute; width:460px; height:460px; border-radius:50%; filter:blur(60px); opacity:0.25; }
-  footer .blob.f1{ background:var(--sunset); top:-160px; left:-100px; }
-  footer .blob.f2{ background:var(--teal); bottom:-200px; right:-100px; }
+  footer{ position:relative; padding:80px clamp(20px,6vw,56px) 44px; background:var(--ink); color:#fff; }
   .footer-inner{ position:relative; z-index:1; max-width:var(--max); margin:0 auto; }
-  footer h2{ font-size:clamp(2rem, 5vw, 3.2rem); font-weight:800; margin-bottom:18px; }
-  footer p.lede{ color:rgba(251,241,220,0.7); max-width:480px; margin-bottom:36px; font-size:1.05rem; }
-  .footer-links{ display:flex; gap:18px; flex-wrap:wrap; margin-bottom:50px; }
-  .footer-links a{
-    text-decoration:none; font-weight:700; font-size:0.95rem; color:var(--cream);
-    border:1.5px solid rgba(251,241,220,0.3); padding:12px 22px; border-radius:999px; transition:all 0.2s ease;
-  }
-  .footer-links a:hover{ background:var(--cream); color:var(--ink); border-color:var(--cream); }
-  .footer-bottom{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:0.8rem; color:rgba(251,241,220,0.45); border-top:1px solid rgba(251,241,220,0.15); padding-top:24px; }
+  footer h2{ font-size:clamp(1.8rem, 4vw, 2.6rem); font-weight:700; margin-bottom:16px; }
+  footer p.lede{ color:rgba(255,255,255,0.68); max-width:480px; margin-bottom:32px; font-size:1.02rem; }
+  .footer-links{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:44px; }
+  .footer-links a{ text-decoration:none; font-weight:700; font-size:0.92rem; color:#fff; border:1.5px solid rgba(255,255,255,0.3); padding:11px 20px; border-radius:10px; transition:all .2s ease; }
+  .footer-links a:hover{ background:#fff; color:var(--ink); border-color:#fff; }
+  .footer-bottom{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:0.78rem; color:rgba(255,255,255,0.4); border-top:1px solid rgba(255,255,255,0.14); padding-top:22px; }
 </style>
 </head>
 <body>
 
 <a href="#main" class="skip-link">Skip to content</a>
-<div class="grain"></div>
 <div class="progress" id="progress"></div>
 
 <header class="nav">
-  <a href="#top" class="logo">
-    <svg class="spin-slow" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="var(--sunset)"/><circle cx="50" cy="50" r="22" fill="var(--gold)"/></svg>
-    Rita Pinto
-  </a>
+  <a href="#top" class="logo"><span class="mark">R</span> Rita Pinto</a>
   <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
   </button>
   <nav class="links" id="navLinks">
-    <a href="#android" data-nav>Android</a>
-    <a href="#mobile-ai" data-nav>Mobile &amp; AI</a>
-    <a href="#thesis" data-nav>Thesis</a>
-    <a href="#foundations" data-nav>Foundations</a>
-    <a href="#about" data-nav>About</a>
-    <a href="#contact" class="nav-cta">Let's talk</a>
+    <a href="#experience" data-nav><span class="en">Experience</span><span class="pt">Experiência</span></a>
+    <a href="#thesis" data-nav><span class="en">Thesis</span><span class="pt">Tese</span></a>
+    <a href="#research" data-nav><span class="en">Research</span><span class="pt">Investigação</span></a>
+    <a href="#foundations" data-nav><span class="en">Foundations</span><span class="pt">Fundações</span></a>
+    <a href="#about" data-nav><span class="en">About</span><span class="pt">Sobre</span></a>
+    <div class="lang-toggle">
+      <button id="btnEN" class="active" type="button">EN</button>
+      <button id="btnPT" type="button">PT</button>
+    </div>
+    <a href="#contact" class="nav-cta"><span class="en">Let's talk</span><span class="pt">Fala comigo</span></a>
   </nav>
 </header>
 
 <main id="main">
 
   <section class="hero" id="top">
-    <div class="sunburst" aria-hidden="true"></div>
-    <div class="blob b1" aria-hidden="true"></div>
-    <div class="blob b2" aria-hidden="true"></div>
-    <div class="hero-content">
-      <span class="eyebrow">Android &amp; Mobile Engineer · Porto, PT</span>
-      <h1>Rita Pinto builds screens that feel <span>obvious</span> in hindsight.</h1>
-      <p class="lede">Three years of shipping Android at production scale — and lately, teaching an app to actually listen, transcribe and understand a conversation in real time.</p>
-      <div class="btn-row">
-        <a href="#android" class="btn btn-primary">See the work</a>
-        <a href="#contact" class="btn btn-outline">Get in touch</a>
+    <div class="hero-grid">
+      <div class="reveal is-visible">
+        <span class="eyebrow"><span class="en">Software Engineer · Mobile, Backend &amp; AI · Porto, PT</span><span class="pt">Engenheira de Software · Mobile, Backend e IA · Porto, PT</span></span>
+        <h1>
+          <span class="en">Rita Pinto builds systems that are as reliable behind the screen as they feel in front of it.</span>
+          <span class="pt">Rita Pinto constrói sistemas tão fiáveis por trás do ecrã como parecem à frente dele.</span>
+        </h1>
+        <p class="lede">
+          <span class="en">3+ years shipping Android at production scale, plus an MSc dissertation building a full-stack AI system — from raw speech to structured data. Looking for a team that ships fast without breaking things.</span>
+          <span class="pt">3+ anos a lançar Android à escala de produção, e uma dissertação de mestrado a construir um sistema full-stack de IA — da fala em bruto a dados estruturados. À procura de uma equipa que lança rápido sem partir nada.</span>
+        </p>
+        <div class="btn-row">
+          <a href="#experience" class="btn btn-primary"><span class="en">See the work</span><span class="pt">Ver o trabalho</span></a>
+          <a href="#contact" class="btn btn-outline"><span class="en">Get in touch</span><span class="pt">Fala comigo</span></a>
+        </div>
+        <div class="chip-row">
+          <span class="chip">Kotlin</span><span class="chip">Jetpack Compose</span><span class="chip">Swift</span>
+          <span class="chip">Python · FastAPI</span><span class="chip">LLMs</span>
+        </div>
       </div>
-      <div class="chip-row">
-        <span class="chip">Kotlin</span>
-        <span class="chip">Jetpack Compose</span>
-        <span class="chip">Swift / SwiftUI</span>
-        <span class="chip">Python</span>
-        <span class="chip">AI / NLP</span>
+      <div class="hero-card reveal is-visible">
+        <div class="hero-portrait"><img src="assets/rita-photo.jpg" alt="Rita Pinto"></div>
+        <div class="hero-stats">
+          <div><div class="num">3+</div><div class="label"><span class="en">years in production Android</span><span class="pt">anos em Android de produção</span></div></div>
+          <div><div class="num">95%</div><div class="label"><span class="en">Compose adoption led</span><span class="pt">adoção de Compose liderada</span></div></div>
+          <div><div class="num">1</div><div class="label"><span class="en">peer-reviewed publication</span><span class="pt">publicação revista por pares</span></div></div>
+          <div><div class="num">2026</div><div class="label"><span class="en">MSc, full-stack AI thesis</span><span class="pt">Mestrado, tese full-stack IA</span></div></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C240,90 480,-10 720,40 C960,90 1200,-10 1440,40 L1440,80 L0,80 Z" fill="var(--paper)"/></svg>
-
-  <!-- ANDROID -->
-  <section class="block" id="android" style="--accent:var(--gold);">
+  <!-- EXPERIENCE -->
+  <section class="block" id="experience">
     <div class="section-head reveal">
-      <div class="sunburst-mini" aria-hidden="true"></div>
-      <h2>Three years, two production apps, one obsession with smooth screens</h2>
-      <p>At Bliss Applications, I worked across a major grocery-retail app and a greenfield product — turning legacy screens into modern Compose and shaping new ones from a blank canvas.</p>
+      <span class="eyebrow-sm">
+        <span class="en">Bliss Applications · Jun 2024 – Present</span>
+        <span class="pt">Bliss Applications · Jun 2024 – Presente</span>
+      </span>
+      <h2>
+        <span class="en">Three years, two production apps, one obsession with reliable delivery</span>
+        <span class="pt">Três anos, duas apps em produção, uma obsessão por entregar sem falhas</span>
+      </h2>
+      <p>
+        <span class="en">At Bliss Applications, I worked across a major grocery-retail app used by millions and a greenfield product — turning legacy screens into modern Compose and shaping new ones from a blank canvas.</span>
+        <span class="pt">Na Bliss Applications, trabalhei numa app de retalho alimentar usada por milhões e num produto greenfield — transformando ecrãs legados em Compose moderno e construindo outros de raiz.</span>
+      </p>
     </div>
 
     <div class="card-grid reveal">
       <div class="card">
         <div class="app-row">
-          <div class="app-tile pingo">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C9 7 6 10.5 6 14a6 6 0 0012 0c0-3.5-3-7-6-12z"/></svg>
-          </div>
+          <div class="logo-tile pingo" style="width:50px;height:50px;"><img src="assets/pingo-doce-logo.png" alt="Pingo Doce" style="width:100%;height:100%;"></div>
           <div>
             <div class="app-name">Pingo Doce</div>
-            <div class="app-sub">grocery retail · millions of users</div>
+            <div class="app-sub"><span class="en">grocery retail · millions of users</span><span class="pt">retalho alimentar · milhões de utilizadores</span></div>
           </div>
         </div>
         <span class="tag">Pingo Doce App</span>
-        <h3>Migrating millions of users to Jetpack Compose</h3>
-        <p>Spearheaded the move from legacy Activity-based architecture to Compose, scaling adoption from 15% to 95% across a production app used by millions.</p>
+        <h3><span class="en">Migrated a production app to Jetpack Compose</span><span class="pt">Migrou uma app em produção para Jetpack Compose</span></h3>
+        <p>
+          <span class="en">Led the migration from legacy Activity-based architecture to Compose, scaling adoption from 15% to 95% across an app used by millions, with full feature parity throughout.</span>
+          <span class="pt">Liderou a migração de arquitetura legada baseada em Activities para Compose, escalando a adoção de 15% para 95% numa app usada por milhões, com paridade total de funcionalidades.</span>
+        </p>
         <ul>
-          <li>Rebuilt Google Maps, QR scanning and carousel components with full feature parity</li>
-          <li>Built the interactive "Play & Win" gamification screens end-to-end</li>
-          <li>Shipped inside tight agile cycles alongside design and product</li>
+          <li><span class="en">Rebuilt Maps, QR scanning and carousel components with full feature parity</span><span class="pt">Reconstruiu componentes de Maps, leitura de QR e carrosséis com paridade total</span></li>
+          <li><span class="en">Built the interactive "Play &amp; Win" gamification screens end-to-end</span><span class="pt">Construiu de ponta a ponta os ecrãs de gamificação "Play &amp; Win"</span></li>
+          <li><span class="en">Shipped inside tight agile cycles alongside design and product</span><span class="pt">Entregou dentro de ciclos ágeis apertados junto com design e produto</span></li>
         </ul>
       </div>
       <div class="card">
         <div class="app-row">
-          <div class="app-tile sapo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <ellipse cx="12" cy="14" rx="7" ry="5.5"/>
-              <circle cx="8" cy="8.5" r="1.8"/>
-              <circle cx="16" cy="8.5" r="1.8"/>
-              <circle cx="9.5" cy="14" r="0.6" fill="currentColor"/>
-              <circle cx="14.5" cy="14" r="0.6" fill="currentColor"/>
-            </svg>
-          </div>
+          <div class="logo-tile" style="width:50px;height:50px;"><img src="assets/sapo-logo.png" alt="SAPO" style="width:76%;height:76%;margin:auto;"></div>
           <div>
             <div class="app-name">SAPO</div>
-            <div class="app-sub">greenfield mobile product</div>
+            <div class="app-sub"><span class="en">greenfield mobile product</span><span class="pt">produto mobile greenfield</span></div>
           </div>
         </div>
         <span class="tag">SAPO App</span>
-        <h3>Establishing the patterns for a greenfield product</h3>
-        <p>Built core screens from the ground up on a new mobile product, setting the UI patterns and navigation architecture other features would follow.</p>
+        <h3><span class="en">Set the technical foundation for a new product</span><span class="pt">Definiu a base técnica de um novo produto</span></h3>
+        <p>
+          <span class="en">Built core screens from the ground up on a new mobile product, establishing the UI patterns and navigation architecture the rest of the team would build on.</span>
+          <span class="pt">Construiu os ecrãs principais de raiz num novo produto mobile, estabelecendo os padrões de UI e a arquitetura de navegação usados pelo resto da equipa.</span>
+        </p>
         <ul>
-          <li>Defined component conventions used across the early product</li>
-          <li>Worked Kotlin + Compose from day one of the build</li>
-          <li>Tight feedback loop with design during active product definition</li>
+          <li><span class="en">Defined component conventions used across the early product</span><span class="pt">Definiu convenções de componentes usadas em todo o produto inicial</span></li>
+          <li><span class="en">Kotlin + Compose from day one of the build</span><span class="pt">Kotlin + Compose desde o primeiro dia de construção</span></li>
+          <li><span class="en">Tight feedback loop with design during active product definition</span><span class="pt">Ciclo de feedback rápido com design durante a definição ativa do produto</span></li>
         </ul>
       </div>
     </div>
 
     <div class="credential reveal">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      <div class="logo-tile" style="width:52px;height:52px;"><img src="assets/bliss-logo.webp" alt="Bliss Applications" style="width:70%;height:70%;margin:auto;"></div>
       <div>
-        <strong>Android Developer Academy — Google Developers</strong>
-        <!-- TODO Rita: adjust cohort / year / specific track here -->
-        <span>Structured training program from Google, focused on modern Android development practices.</span>
+        <strong><span class="en">Bliss Applications — Android Developer Academy, Google Developers</span><span class="pt">Bliss Applications — Android Developer Academy, Google Developers</span></strong>
+        <span><span class="en">Joined via Google's structured Android training program; converted from intern to full-time Mobile Developer.</span><span class="pt">Entrou através do programa estruturado de formação Android da Google; passou de estagiária a Mobile Developer efetiva.</span></span>
       </div>
     </div>
 
@@ -468,178 +311,165 @@
     </div>
   </section>
 
-  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C240,-10 480,90 720,40 C960,-10 1200,90 1440,40 L1440,80 L0,80 Z" fill="var(--cream)"/></svg>
-
-  <!-- MOBILE & AI -->
-  <section class="block" id="mobile-ai" style="--accent:var(--olive); background:var(--cream);">
-    <div class="section-head reveal">
-      <div class="sunburst-mini" aria-hidden="true"></div>
-      <h2>A React Native app that helps coma patients reconnect</h2>
-      <p>BrainGain pairs personalised cognitive and physical rehabilitation with adaptive stimuli, coordinated through caregivers — peer-reviewed and published at MobiHealth 2023.</p>
-    </div>
-
-    <div class="card reveal" style="max-width:680px;">
-      <span class="tag">Research Project · BrainGain</span>
-      <h3>Technology for increasing consciousness in coma patients</h3>
-      <p>Designed and prototyped a React Native app delivering personalised rehabilitation programmes, coordinating caregivers and adapting stimuli to each patient's responses.</p>
-      <div class="pub-strip">
-        <span>Springer · LNICST vol. 578, pp. 374–385</span>
-        <a href="https://doi.org/10.1007/978-3-031-60665-6_28" target="_blank" rel="noopener">Read the paper →</a>
-      </div>
-    </div>
-  </section>
-
-  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C240,90 480,-10 720,40 C960,90 1200,-10 1440,40 L1440,80 L0,80 Z" fill="var(--paper)"/></svg>
-
   <!-- THESIS -->
-  <section class="block" id="thesis" style="--accent:var(--teal);">
+  <section class="block" id="thesis" style="background:var(--paper);">
     <div class="section-head reveal">
-      <div class="sunburst-mini" aria-hidden="true"></div>
-      <h2>Teaching an iOS app to turn sales conversations into structured CRM data</h2>
-      <p>VoiceCRM is my MSc dissertation at ISEP — a Swift app that records a sales conversation and walks away with clean, structured CRM fields, no manual entry required.</p>
+      <span class="eyebrow-sm"><span class="en">MSc Dissertation · ISEP · Submitted Jun 2026</span><span class="pt">Dissertação de Mestrado · ISEP · Submetida Jun 2026</span></span>
+      <h2><span class="en">A full-stack AI system that turns conversations into structured data</span><span class="pt">Um sistema full-stack de IA que transforma conversas em dados estruturados</span></h2>
+      <p>
+        <span class="en">VoiceCRM is my MSc dissertation: an iOS app that listens to a sales conversation and hands back clean, structured CRM data — no manual entry required.</span>
+        <span class="pt">VoiceCRM é a minha dissertação de mestrado: uma app iOS que ouve uma conversa de vendas e devolve dados de CRM limpos e estruturados — sem introdução manual.</span>
+      </p>
     </div>
 
     <div class="card reveal" style="max-width:760px;">
-      <span class="tag">MSc Dissertation · Software Engineering</span>
-      <h3>VoiceCRM — listening, transcribing, extracting</h3>
-      <p>The app records on-device, runs speaker diarization to separate who said what, transcribes European Portuguese speech, and sends the transcript to a FastAPI backend that extracts structured CRM JSON through an LLM.</p>
+      <span class="tag">VoiceCRM — <span class="en">Full-Stack AI System</span><span class="pt">Sistema Full-Stack de IA</span></span>
+      <h3><span class="en">Listening, transcribing, extracting</span><span class="pt">Ouvir, transcrever, extrair</span></h3>
+      <p>
+        <span class="en">The app records on-device, runs speaker diarization to separate who said what, transcribes European Portuguese speech, and sends the transcript to a FastAPI backend that extracts structured CRM JSON through an LLM.</span>
+        <span class="pt">A app grava no dispositivo, corre diarização de oradores para separar quem disse o quê, transcreve fala em português europeu, e envia a transcrição para um backend FastAPI que extrai JSON de CRM estruturado através de um LLM.</span>
+      </p>
       <ul>
-        <li>On-device speaker diarization via FluidAudio, replacing an earlier CoreML encoder</li>
-        <li>European Portuguese transcription with SFSpeechRecognizer</li>
-        <li>Structured extraction via Groq's Llama 4 Scout, served from a Python/FastAPI backend</li>
-        <li>Evaluated across real sales conversations using WER and DER metrics</li>
+        <li><span class="en">On-device speaker diarization via FluidAudio (pyannote-based)</span><span class="pt">Diarização de oradores no dispositivo via FluidAudio (baseado em pyannote)</span></li>
+        <li><span class="en">European Portuguese transcription with SFSpeechRecognizer</span><span class="pt">Transcrição de português europeu com SFSpeechRecognizer</span></li>
+        <li><span class="en">Structured extraction via Groq's Llama 4 Scout, served from a Python/FastAPI backend</span><span class="pt">Extração estruturada via Llama 4 Scout (Groq), servida a partir de um backend Python/FastAPI</span></li>
+        <li><span class="en">Evaluated across 12 real conversation sessions using WER, DER, F1 and hallucination rate, over three Design Science Research iterations</span><span class="pt">Avaliado em 12 sessões de conversação reais usando WER, DER, F1 e taxa de alucinação, ao longo de três iterações de Design Science Research</span></li>
       </ul>
     </div>
 
     <div class="data-panel reveal">
-      <div class="data-cell"><div class="num">54.5%</div><div class="label">F1 score</div></div>
-      <div class="data-cell"><div class="num">1.02s</div><div class="label">Latency</div></div>
-      <div class="data-cell"><div class="num">100%</div><div class="label">Parse rate</div></div>
+      <div class="data-cell"><div class="num">12</div><div class="label"><span class="en">Real sessions evaluated</span><span class="pt">Sessões reais avaliadas</span></div></div>
+      <div class="data-cell"><div class="num">3</div><div class="label"><span class="en">DSR iterations</span><span class="pt">Iterações DSR</span></div></div>
+      <div class="data-cell"><div class="num">4</div><div class="label"><span class="en">Metrics tracked</span><span class="pt">Métricas acompanhadas</span></div></div>
     </div>
 
     <div class="stack-row reveal">
       <span class="chip">Swift / SwiftUI</span><span class="chip">Python</span><span class="chip">FastAPI</span>
-      <span class="chip">Groq API</span><span class="chip">On-device ML</span><span class="chip">WER / DER eval</span>
+      <span class="chip">Groq API · Llama 4</span><span class="chip"><span class="en">On-device ML</span><span class="pt">ML no dispositivo</span></span><span class="chip">WER / DER</span>
     </div>
   </section>
 
-  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C240,-10 480,90 720,40 C960,-10 1200,90 1440,40 L1440,80 L0,80 Z" fill="var(--cream)"/></svg>
+  <!-- RESEARCH -->
+  <section class="block" id="research">
+    <div class="section-head reveal">
+      <span class="eyebrow-sm"><span class="en">Peer-reviewed · MobiHealth 2023 · Springer</span><span class="pt">Revisto por pares · MobiHealth 2023 · Springer</span></span>
+      <h2><span class="en">A React Native app that helps coma patients reconnect</span><span class="pt">Uma app React Native que ajuda doentes em coma a reconectar</span></h2>
+      <p>
+        <span class="en">BrainGain pairs personalised cognitive and physical rehabilitation with adaptive stimuli, coordinated through caregivers.</span>
+        <span class="pt">BrainGain junta reabilitação cognitiva e física personalizada com estímulos adaptativos, coordenados através de cuidadores.</span>
+      </p>
+    </div>
+
+    <div class="card reveal" style="max-width:680px;">
+      <span class="tag"><span class="en">Research Project</span><span class="pt">Projeto de Investigação</span> · BrainGain</span>
+      <h3><span class="en">Technology for increasing consciousness in coma patients</span><span class="pt">Tecnologia para aumentar a consciência em doentes em coma</span></h3>
+      <p>
+        <span class="en">Designed and prototyped a React Native app delivering personalised rehabilitation programmes, coordinating caregivers and adapting stimuli to each patient's responses. Originated from my BSc final project at UTAD.</span>
+        <span class="pt">Concebeu e prototipou uma app React Native que entrega programas de reabilitação personalizados, coordenando cuidadores e adaptando estímulos às respostas de cada doente. Teve origem no projeto final da licenciatura na UTAD.</span>
+      </p>
+      <div class="pub-strip">
+        <span>Springer · LNICST vol. 578, pp. 374–385</span>
+        <a href="https://doi.org/10.1007/978-3-031-60665-6_28" target="_blank" rel="noopener"><span class="en">Read the paper →</span><span class="pt">Ler o artigo →</span></a>
+      </div>
+    </div>
+  </section>
 
   <!-- FOUNDATIONS -->
-  <section class="block" id="foundations" style="--accent:var(--olive); background:var(--cream);">
+  <section class="block" id="foundations" style="background:var(--paper);">
     <div class="section-head reveal">
-      <div class="sunburst-mini" aria-hidden="true"></div>
-      <h2>Two degrees worth of the rest of the stack</h2>
-      <p>No job title attached to these yet — but my BSc and MSc went well beyond mobile: backend systems, AI, databases, networks, security and the practices that keep software honest under pressure.</p>
+      <span class="eyebrow-sm"><span class="en">BSc + MSc coursework</span><span class="pt">Licenciatura + Mestrado</span></span>
+      <h2><span class="en">Two degrees worth of the rest of the stack</span><span class="pt">Duas licenciaturas cobrindo o resto da stack</span></h2>
+      <p>
+        <span class="en">No job title attached to these yet — but my academic background goes well beyond mobile: backend systems, AI, databases, networks, and the practices that keep software honest under pressure.</span>
+        <span class="pt">Ainda sem título profissional associado — mas a minha formação vai muito além do mobile: sistemas backend, IA, bases de dados, redes, e as práticas que mantêm o software fiável sob pressão.</span>
+      </p>
     </div>
 
     <div class="foundation-grid reveal">
       <div class="foundation-card">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><circle cx="7" cy="7" r="0.8" fill="currentColor"/><circle cx="7" cy="17" r="0.8" fill="currentColor"/></svg>
-        <h3>Backend &amp; Software Architecture</h3>
-        <p>Layered and service-oriented design, the same architectural thinking that shapes VoiceCRM's FastAPI backend.</p>
+        <h3><span class="en">Backend &amp; Architecture</span><span class="pt">Backend e Arquitetura</span></h3>
+        <p><span class="en">Layered and service-oriented design, the same thinking that shapes VoiceCRM's FastAPI backend.</span><span class="pt">Design em camadas e orientado a serviços, o mesmo raciocínio que molda o backend FastAPI do VoiceCRM.</span></p>
       </div>
       <div class="foundation-card">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></svg>
-        <h3>AI, NLP &amp; LLMs</h3>
-        <p>Studied AI fundamentals academically, then applied them hands-on — prompt design, evaluation metrics, integrating LLMs into a real product.</p>
+        <h3><span class="en">AI, NLP &amp; LLMs</span><span class="pt">IA, PLN e LLMs</span></h3>
+        <p><span class="en">Studied AI fundamentals academically, then applied them hands-on — prompt design, evaluation metrics, LLM integration.</span><span class="pt">Estudou fundamentos de IA academicamente, depois aplicou-os na prática — prompt design, métricas de avaliação, integração de LLMs.</span></p>
       </div>
       <div class="foundation-card">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>
-        <h3>Databases</h3>
-        <p>Schema design, query optimisation and data modelling — relational fundamentals applied across every project above.</p>
+        <h3><span class="en">Databases</span><span class="pt">Bases de Dados</span></h3>
+        <p><span class="en">Schema design, query optimisation and data modelling — applied across every project above.</span><span class="pt">Design de esquemas, otimização de queries e modelação de dados — aplicados em todos os projetos acima.</span></p>
       </div>
       <div class="foundation-card">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M7.8 7.5L11 16M16.2 7.5L13 16M8.4 6h7.2"/></svg>
-        <h3>Distributed Systems &amp; Networks</h3>
-        <p>Multicore &amp; distributed systems, computer networks and operating systems — how software behaves once more than one machine is involved.</p>
+        <h3><span class="en">Distributed Systems &amp; Networks</span><span class="pt">Sistemas Distribuídos e Redes</span></h3>
+        <p><span class="en">Multicore &amp; distributed systems, computer networks and operating systems.</span><span class="pt">Sistemas multicore e distribuídos, redes de computadores e sistemas operativos.</span></p>
       </div>
       <div class="foundation-card">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-        <h3>Secure Software Development</h3>
-        <p>Threat modelling and secure coding practices — the habit of asking "how does this break" before shipping anything.</p>
+        <h3><span class="en">Secure Software Development</span><span class="pt">Desenvolvimento Seguro de Software</span></h3>
+        <p><span class="en">Threat modelling and secure coding practices — asking "how does this break" before shipping.</span><span class="pt">Modelação de ameaças e boas práticas de segurança — perguntar "como é que isto parte" antes de lançar.</span></p>
       </div>
       <div class="foundation-card">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 11l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-        <h3>Software Quality &amp; Testing</h3>
-        <p>Requirements engineering and software quality coursework, paired with unit testing on every shipped feature since.</p>
-      </div>
-      <div class="foundation-card">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12a8 8 0 0114-5M20 12a8 8 0 01-14 5"/><path d="M18 3v4h-4M6 21v-4h4"/></svg>
-        <h3>CI/CD &amp; Pipelines</h3>
-        <p>Comfortable setting up and working inside CI/CD pipelines — adopted from day one in my internship and used since.</p>
+        <h3><span class="en">Software Quality &amp; Testing</span><span class="pt">Qualidade de Software e Testes</span></h3>
+        <p><span class="en">Requirements engineering and software quality coursework, paired with unit testing on every shipped feature.</span><span class="pt">Engenharia de requisitos e qualidade de software, aliadas a testes unitários em cada funcionalidade lançada.</span></p>
       </div>
     </div>
-
-    <p class="foundation-note reveal">I haven't worked professionally in these areas yet — but they're not theoretical either. They show up in how I structure code, the questions I ask in code review, and the parts of VoiceCRM that go beyond the Swift UI layer.</p>
   </section>
 
-  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C240,-10 480,90 720,40 C960,-10 1200,90 1440,40 L1440,80 L0,80 Z" fill="var(--cream)"/></svg>
-
   <!-- ABOUT -->
-  <section class="block" id="about" style="--accent:var(--rust); background:var(--cream);">
+  <section class="block" id="about">
     <div class="section-head reveal">
-      <div class="sunburst-mini" aria-hidden="true"></div>
-      <h2>Off the clock, still building something</h2>
-    </div>
-
-    <div class="about-top reveal">
-      <div class="portrait-wrap">
-        <div class="portrait-halo" aria-hidden="true"></div>
-        <img class="portrait" src="rita-photo.png" alt="Rita Pinto smiling, sitting backwards on a chair, indoors.">
-      </div>
-      <div class="about-text">
-        <p>I like things that are well-made and a little bit fun — code included. Most of what I build outside of work starts the same way the apps above did: noticing something clunky, and not being able to leave it alone until it's smoother.</p>
-        <p>I'm based in Porto, finishing my MSc while job-hunting for my next Android role, and genuinely enjoy the parts of the job most people skip — clean architecture, tidy state management, the kind of UI detail nobody notices unless it's missing.</p>
-      </div>
+      <h2><span class="en">Off the clock, still building something</span><span class="pt">Fora do horário, continua a construir algo</span></h2>
     </div>
 
     <div class="side-grid reveal">
       <div>
-        <h3 style="font-size:1.1rem; margin-bottom:18px;">Where I've been</h3>
+        <h3 style="font-size:1rem; margin-bottom:16px; font-family:'Work Sans',sans-serif; font-weight:600;"><span class="en">Where I've been</span><span class="pt">Por onde passei</span></h3>
         <div class="timeline">
           <div class="timeline-item">
-            <div class="when">Jun. 2024 — Present</div>
-            <h4>Mobile Developer, Bliss Applications</h4>
+            <div class="when"><span class="en">Jun 2024 — Present</span><span class="pt">Jun 2024 — Presente</span></div>
+            <h4><span class="en">Mobile Developer, Bliss Applications</span><span class="pt">Mobile Developer, Bliss Applications</span></h4>
             <div class="where">Porto, Portugal</div>
           </div>
           <div class="timeline-item">
-            <div class="when">Sept. 2023 — Jun. 2024</div>
-            <h4>Android Developer Intern, Bliss Applications</h4>
+            <div class="when">Sept 2023 — Jun 2024</div>
+            <h4><span class="en">Android Developer Intern, Bliss Applications</span><span class="pt">Estagiária Android Developer, Bliss Applications</span></h4>
             <div class="where">Porto, Portugal</div>
           </div>
           <div class="timeline-item">
-            <div class="when">Sept. 2023 — Jun. 2026 (expected)</div>
-            <h4>MSc Software Engineering, ISEP</h4>
-            <div class="where">Porto, Portugal</div>
+            <div class="when">Sept 2023 — Jun 2026</div>
+            <h4><span class="en">MSc Software Engineering, ISEP</span><span class="pt">Mestrado em Engenharia de Software, ISEP</span></h4>
+            <div class="where">Porto, Portugal · <span class="en">Dissertation submitted, defense pending</span><span class="pt">Dissertação submetida, defesa pendente</span></div>
           </div>
           <div class="timeline-item">
-            <div class="when">Oct. 2020 — Jun. 2023</div>
-            <h4>BSc Computer Engineering, UTAD</h4>
+            <div class="when">Oct 2020 — Jun 2023</div>
+            <h4><span class="en">BSc Computer Engineering, UTAD</span><span class="pt">Licenciatura em Engenharia Informática, UTAD</span></h4>
             <div class="where">Vila Real, Portugal</div>
-            <div class="extra">Secretary, Computer Science Student Union (NEEI) · Presenter, UTAD Summit &amp; CS Days (2021, 2022)</div>
+            <div class="extra"><span class="en">Secretary, Computer Science Student Union (NEEI) · Presenter, UTAD Summit &amp; CS Days (2021, 2022)</span><span class="pt">Secretária, Núcleo de Estudantes de Engenharia Informática (NEEI) · Apresentadora, UTAD Summit e CS Days (2021, 2022)</span></div>
           </div>
         </div>
         <div class="lang-row">
-          <!-- TODO Rita: confirm/add proficiency levels or other languages -->
-          <span class="lang-chip"><b>Portuguese</b> · Native</span>
-          <span class="lang-chip"><b>English</b> · Fluent</span>
+          <span class="lang-chip"><b><span class="en">Portuguese</span><span class="pt">Português</span></b> · <span class="en">Native</span><span class="pt">Nativo</span></span>
+          <span class="lang-chip"><b><span class="en">English</span><span class="pt">Inglês</span></b> · <span class="en">Fluent</span><span class="pt">Fluente</span></span>
         </div>
       </div>
 
       <div>
         <ul class="fact-list">
-          <li><span class="dot"></span>Recently adopted a puppy, currently in the "everything is a chew toy" phase</li>
-          <li><span class="dot"></span>Designs and builds small web projects purely for the fun of it</li>
-          <li><span class="dot"></span>Always has a playlist running in the background while coding</li>
-          <li><span class="dot"></span>Direct communicator — says what she means, expects the same back</li>
+          <li><span class="dot"></span><span class="en">Recently adopted a puppy, currently in the "everything is a chew toy" phase</span><span class="pt">Adotou recentemente um cachorro, atualmente na fase "tudo é uma brincadeira de mastigar"</span></li>
+          <li><span class="dot"></span><span class="en">Designs and builds small web projects purely for the fun of it</span><span class="pt">Cria pequenos projetos web só pelo gosto de criar</span></li>
+          <li><span class="dot"></span><span class="en">Always has a playlist running in the background while coding</span><span class="pt">Tem sempre uma playlist a tocar enquanto programa</span></li>
+          <li><span class="dot"></span><span class="en">Direct communicator — says what she means, expects the same back</span><span class="pt">Comunicadora direta — diz o que pensa, espera o mesmo de volta</span></li>
         </ul>
-        <div class="card" style="margin-top:18px;">
-          <span class="tag">Side Project</span>
-          <h3>Adeus, Adeus — a goodbye, designed properly</h3>
-          <p>When three years at Bliss came to an end, instead of a plain message I built a small interactive site for it — a letter, photo memories, and a way for the team to leave their own message back.</p>
+        <div class="card" style="margin-top:16px;">
+          <span class="tag"><span class="en">Side Project</span><span class="pt">Projeto Pessoal</span></span>
+          <h3><span class="en">Adeus, Adeus — a goodbye, designed properly</span><span class="pt">Adeus, Adeus — uma despedida, bem desenhada</span></h3>
+          <p><span class="en">When three years at Bliss came to an end, instead of a plain message I built a small interactive site for it — a letter, photo memories, and a way for the team to leave their own message back.</span><span class="pt">Quando três anos na Bliss chegaram ao fim, em vez de uma mensagem simples, construiu um pequeno site interativo — uma carta, memórias em fotos, e uma forma de a equipa deixar também a sua mensagem.</span></p>
           <div class="pub-strip">
-            <a href="https://ritapintoblissapp.github.io/Adeus_Adeus/" target="_blank" rel="noopener">Visit the site →</a>
+            <a href="https://ritapintoblissapp.github.io/Adeus_Adeus/" target="_blank" rel="noopener"><span class="en">Visit the site →</span><span class="pt">Visitar o site →</span></a>
           </div>
         </div>
       </div>
@@ -649,26 +479,43 @@
 </main>
 
 <footer id="contact">
-  <div class="blob f1" aria-hidden="true"></div>
-  <div class="blob f2" aria-hidden="true"></div>
   <div class="footer-inner">
-    <h2>Let's build something that works.</h2>
-    <p class="lede">Open to Android and mobile engineering roles — happiest on teams that care about craft as much as shipping speed.</p>
+    <h2><span class="en">Let's build something that works.</span><span class="pt">Vamos construir algo que funciona.</span></h2>
+    <p class="lede"><span class="en">Open to Software Engineering roles across mobile, backend and AI — happiest on teams that care about craft as much as shipping speed.</span><span class="pt">Aberta a oportunidades de Engenharia de Software em mobile, backend e IA — mais feliz em equipas que valorizam a qualidade tanto quanto a velocidade de entrega.</span></p>
     <div class="footer-links">
-      <a href="mailto:ritapintotech02@gmail.com">Email me</a>
+      <a href="mailto:ritapintotech02@gmail.com"><span class="en">Email me</span><span class="pt">Envia-me um email</span></a>
       <a href="https://linkedin.com/in/ritapinto02" target="_blank" rel="noopener">LinkedIn</a>
-      <!-- TODO Rita: swap in your real GitHub URL -->
-      <a href="https://github.com/ritapinto02" target="_blank" rel="noopener">GitHub</a>
     </div>
     <div class="footer-bottom">
       <span>Rita Pinto · Porto, Portugal</span>
-      <span>Built with Radical Optimism™ energy, no actual record deal</span>
+      <span id="langFooter">EN</span>
     </div>
   </div>
 </footer>
 
 <script>
-  // mobile menu
+  const html = document.documentElement;
+  const btnEN = document.getElementById('btnEN');
+  const btnPT = document.getElementById('btnPT');
+  const langFooter = document.getElementById('langFooter');
+  function setLang(lang){
+    html.setAttribute('data-lang', lang);
+    html.setAttribute('lang', lang);
+    btnEN.classList.toggle('active', lang==='en');
+    btnPT.classList.toggle('active', lang==='pt');
+    langFooter.textContent = lang.toUpperCase();
+    try{ localStorage.setItem('rp_lang', lang); }catch(e){}
+  }
+  btnEN.addEventListener('click', () => setLang('en'));
+  btnPT.addEventListener('click', () => setLang('pt'));
+  (function initLang(){
+    let saved = null;
+    try{ saved = localStorage.getItem('rp_lang'); }catch(e){}
+    if(saved){ setLang(saved); return; }
+    const browser = (navigator.language || 'en').toLowerCase();
+    setLang(browser.startsWith('pt') ? 'pt' : 'en');
+  })();
+
   const menuBtn = document.getElementById('menuBtn');
   const navLinks = document.getElementById('navLinks');
   menuBtn.addEventListener('click', () => {
@@ -680,42 +527,37 @@
     menuBtn.setAttribute('aria-expanded', 'false');
   }));
 
-  // scroll progress
   const progress = document.getElementById('progress');
   function updateProgress(){
     const h = document.documentElement;
     const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-    progress.style.width = scrolled + '%';
+    progress.style.width = (isFinite(scrolled) ? scrolled : 0) + '%';
   }
   document.addEventListener('scroll', updateProgress, { passive:true });
   updateProgress();
 
-  // scroll spy
   const navItems = document.querySelectorAll('[data-nav]');
-  const sections = ['android','mobile-ai','thesis','foundations','about'].map(id => document.getElementById(id));
+  const sectionIds = ['experience','thesis','research','foundations','about'];
   function updateActive(){
     let current = null;
-    sections.forEach(sec => {
+    sectionIds.forEach(id => {
+      const sec = document.getElementById(id);
+      if(!sec) return;
       const rect = sec.getBoundingClientRect();
-      if(rect.top <= 120) current = sec.id;
+      if(rect.top <= 120) current = id;
     });
-    navItems.forEach(a => {
-      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-    });
+    navItems.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
   }
   document.addEventListener('scroll', updateActive, { passive:true });
   updateActive();
 
-  // reveal on scroll
   const reveals = document.querySelectorAll('.reveal');
   if('IntersectionObserver' in window){
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('is-visible'); obs.unobserve(e.target); } });
-    }, { threshold:0.15 });
+    }, { threshold:0.12 });
     reveals.forEach(el => obs.observe(el));
-  } else {
-    reveals.forEach(el => el.classList.add('is-visible'));
-  }
+  } else { reveals.forEach(el => el.classList.add('is-visible')); }
 </script>
 
 </body>
