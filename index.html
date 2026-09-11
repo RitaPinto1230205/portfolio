@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rita Pinto</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='75' font-size='70' text-anchor='middle'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -46,11 +47,9 @@
   header{
     padding: 56px 0 40px;
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 18px;
-    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
   }
   .name{
     font-family: 'Fraunces', serif;
@@ -96,9 +95,10 @@
   .category:last-child{ margin-bottom: 0; }
   .category h2{
     font-family: 'Fraunces', serif;
+    font-style: italic;
     font-weight: 500;
-    font-size: 1.15rem;
-    margin: 0 0 16px;
+    font-size: 1.55rem;
+    margin: 0 0 22px;
   }
   .category ul{
     list-style: none;
@@ -106,8 +106,7 @@
     padding: 0;
   }
   .category li{
-    padding: 12px 0;
-    border-top: 1px solid var(--line);
+    padding: 10px 0;
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -171,6 +170,62 @@
   .bio-text p:last-child{ margin-bottom: 0; }
   .bio-text strong{ color: var(--ink); font-weight: 500; }
 
+  /* ---- Education page ---- */
+  .edu-columns{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  @media (max-width: 560px){
+    .edu-columns{ grid-template-columns: 1fr; gap: 48px; }
+  }
+  .edu-col h2{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.4rem;
+    margin: 0 0 28px;
+    color: var(--ink);
+  }
+  .timeline{
+    position: relative;
+    padding-left: 22px;
+    border-left: 1px solid var(--line);
+  }
+  .timeline-item{
+    position: relative;
+    padding-bottom: 30px;
+  }
+  .timeline-item:last-child{ padding-bottom: 0; }
+  .timeline-item::before{
+    content: '';
+    position: absolute;
+    left: -27px;
+    top: 4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ink);
+  }
+  .timeline-item .when{
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+  }
+  .timeline-item h3{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.02rem;
+    margin: 4px 0 4px;
+  }
+  .timeline-item p{
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
   /* ---- Footer ---- */
   footer{
     border-top: 1px solid var(--line);
@@ -207,6 +262,7 @@
     <span class="name">Rita Pinto</span>
     <nav>
       <button id="btnWork" class="active" type="button">Work</button>
+      <button id="btnEducation" type="button">Education</button>
       <button id="btnBio" type="button">Bio</button>
     </nav>
   </header>
@@ -289,7 +345,64 @@
       </div>
     </section>
 
-    <!-- BIO PAGE -->
+    <!-- EDUCATION PAGE -->
+    <section class="page" id="pageEducation">
+      <h1 class="intro">Studying and working at the same time, for most of it.</h1>
+
+      <div class="edu-columns">
+        <div class="edu-col">
+          <h2>Education</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="when">2023 – 2026</div>
+              <h3>Instituto Superior de Engenharia do Porto (ISEP) — MSc Software Engineering</h3>
+              <p>Porto, Portugal</p>
+            </div>
+            <div class="timeline-item">
+              <div class="when">2020 – 2023</div>
+              <h3>Universidade de Trás-os-Montes e Alto Douro (UTAD) — BSc Computer Engineering</h3>
+              <p>Vila Real, Portugal</p>
+            </div>
+            <div class="timeline-item">
+              <div class="when">2019</div>
+              <h3>Escola Camilo Castelo Branco</h3>
+              <p>Vila Real, Portugal</p>
+            </div>
+            <div class="timeline-item">
+              <div class="when">Until 2018</div>
+              <h3>Escola Secundária D. Sancho II</h3>
+              <p>Alijó, Portugal</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="edu-col">
+          <h2>Alongside it</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="when">2023 – 2026</div>
+              <h3>Bliss Applications</h3>
+              <p>Working as an Android Developer while completing the Master's — focused on finishing the dissertation and the job at the same time</p>
+            </div>
+            <div class="timeline-item">
+              <div class="when">2020 – 2023</div>
+              <h3>Núcleo de Estudantes de Informática</h3>
+              <p>Two years of involvement — one in the Informatics Department, one on the board</p>
+            </div>
+            <div class="timeline-item">
+              <div class="when">2020 – 2023</div>
+              <h3>UTAD Summit</h3>
+              <p>Presented the UTAD Summit twice</p>
+            </div>
+            <div class="timeline-item">
+              <div class="when">Secondary school</div>
+              <h3>End-of-year show</h3>
+              <p>Presented the school's end-of-year show three times</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <section class="page" id="pageBio">
       <div class="bio-photo">
         <!-- Replace src with your own photo -->
@@ -320,18 +433,23 @@
 
 <script>
   const btnWork = document.getElementById('btnWork');
+  const btnEducation = document.getElementById('btnEducation');
   const btnBio = document.getElementById('btnBio');
   const pageWork = document.getElementById('pageWork');
+  const pageEducation = document.getElementById('pageEducation');
   const pageBio = document.getElementById('pageBio');
 
+  const pages = { work: pageWork, education: pageEducation, bio: pageBio };
+  const btns = { work: btnWork, education: btnEducation, bio: btnBio };
+
   function showPage(which){
-    const isWork = which === 'work';
-    pageWork.classList.toggle('active', isWork);
-    pageBio.classList.toggle('active', !isWork);
-    btnWork.classList.toggle('active', isWork);
-    btnBio.classList.toggle('active', !isWork);
+    Object.keys(pages).forEach(key => {
+      pages[key].classList.toggle('active', key === which);
+      btns[key].classList.toggle('active', key === which);
+    });
   }
   btnWork.addEventListener('click', () => showPage('work'));
+  btnEducation.addEventListener('click', () => showPage('education'));
   btnBio.addEventListener('click', () => showPage('bio'));
 </script>
 
